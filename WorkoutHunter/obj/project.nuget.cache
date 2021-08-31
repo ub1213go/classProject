@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nx3BPaBTcVB4Iym4c6HguV/9DG2KPjdLlY4QWpeoNnDJYk94+cCo1oKoxw6Q2mli2lcIlW0X/mvPhB82LQoX9Q==",
+  "dgSpecHash": "7jzdEY/fu3CoL899eFCzCQjAZZVBhJgi18+0i3B3ZH1d1lN1SZL2kk4F6kK0sOf1xRD8y/LHhePq6sF6m61rUQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ub\\Desktop\\github\\IIFIDB\\WorkoutHunterV2\\WorkoutHunterV2.csproj",
+  "projectFilePath": "C:\\Users\\ub\\Desktop\\git\\WorkoutHunter\\WorkoutHunterV2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ub\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

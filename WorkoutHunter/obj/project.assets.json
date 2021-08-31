@@ -7215,11 +7215,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ub\\Desktop\\github\\IIFIDB\\WorkoutHunterV2\\WorkoutHunterV2.csproj",
+      "projectUniqueName": "C:\\Users\\ub\\Desktop\\git\\WorkoutHunter\\WorkoutHunterV2.csproj",
       "projectName": "WorkoutHunterV2",
-      "projectPath": "C:\\Users\\ub\\Desktop\\github\\IIFIDB\\WorkoutHunterV2\\WorkoutHunterV2.csproj",
+      "projectPath": "C:\\Users\\ub\\Desktop\\git\\WorkoutHunter\\WorkoutHunterV2.csproj",
       "packagesPath": "C:\\Users\\ub\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ub\\Desktop\\github\\IIFIDB\\WorkoutHunterV2\\obj\\",
+      "outputPath": "C:\\Users\\ub\\Desktop\\git\\WorkoutHunter\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
