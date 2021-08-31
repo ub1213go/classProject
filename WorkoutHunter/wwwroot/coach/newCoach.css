@@ -1,0 +1,149 @@
+.container-fluid{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.containerSet{
+    padding-top: 3%;
+    margin-bottom: auto;
+}
+.students{
+    float: left;
+    border: 1px solid rgb(19, 18, 18);
+    width: 100%;
+
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+}
+.student{
+    border:0px;
+    height: 100px;
+}
+.student:hover{
+    color: white;
+}
+.tablinks{
+    width: 100%;
+    height: 100px;
+    background-color: rgb(154, 206, 200);
+    text-align:center;
+    margin-bottom: 2px;
+    border: 2px solid #0f0f0f; /* Green */
+    border-radius: 12px;
+    /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+    opacity:0.8;
+    font-size:x-large;
+}
+.tablinks:hover{
+    color: white;
+}
+.tablinks:active{
+    color: darkgreen;
+}
+#setbtn {
+    background-color: rgba(0, 0, 0, 0.0);
+    border: 0px;
+    position: relative;
+    display: inline-block;
+}
+.studentImg{
+    text-align: center;
+}
+.student_x_Img{
+    display: inline-block;
+}
+.studentContent{
+    font-size: 36px;
+    /* vertical-align: center; */
+}
+.StudentsNameStorehouse{
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    width: 80%;
+    border: 5px inset #A44411;
+    border-radius: 25px;
+}
+.StudentInformationOut{
+    width: 90%;
+    height: 95%;
+    margin:auto;
+    background: rgba(208, 236, 245, 0.438);
+    opacity: 0.8;
+    border: black 2px solid ;
+    margin-bottom: 10%;
+    -webkit-box-shadow: 5px 4px 15px 2px #000000;
+    box-shadow: 5px 4px 15px 2px #000000;
+}
+#StudentInformation{
+    margin-top: 5%;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+.st_inputName{
+    width: 100%;
+    height: 80%;
+    margin: auto;
+    text-align: center;
+    font-size: x-large;
+}
+.sexText{
+    font-size:x-large;
+    float: left;
+    margin-left: 5%;
+}
+#inlineRadio1{
+    width: 25px;
+    height: 25px;
+    margin-top:10%;
+    float: left;
+}
+#inlineRadio2{
+    width: 25px;
+    height: 25px;
+    margin-top:4%;
+    float: left;
+}
+.studentPointColumn{
+    display: inline;
+    justify-content: center;
+    text-align: center;
+}
+.studentPoint{
+    display: inline;
+}
+.StudentContentFormat{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.myMargin {
+    margin: 45px 0px 45px 0px !important;
+}
+
+@media(max-width:375px) {
+    .myMargin {
+        margin: 20px 0px 20px 0px !important;
+    }
+}
+
+button {
+    font-weight: 800;
+}
+@import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+
+body {
+    font-family: 'cwTeXYen', sans-serif !important;
+}
+
+.MySelectBtn {
+    background-color: #FFC861;
+    color: #01398F;
+    transform: translate(-10px, -10px);
+    transition: transform 0.5s;
+    box-shadow: 5px 5px 10px black;
+}

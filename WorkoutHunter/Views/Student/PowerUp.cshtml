@@ -1,0 +1,137 @@
+﻿@model WorkoutHunterV2.Models.DbModels.UserInfo
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>workout</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/js/bootstrap.min.js" rel="stylesheet" />
+    <link href="/dist/rpgui.min.css" rel="stylesheet" type="text/css" />
+    <script src="/dist/rpgui.min.js"></script>
+
+    <style>
+        body {
+            background-color: rgba(0, 0, 0, 0.6);
+            background-blend-mode: multiply;
+            background-image: url(/student/img/BG3.png);
+            background-size: cover;
+        }
+
+        .nav_div {
+            height: 70vh;
+            border-image-width: 1.5vh;
+            border-width: 1.5vh;
+            box-sizing: border-box;
+            border-image-repeat: repeat;
+            padding: 2vh;
+            border-style: solid;
+            border-image-source: url(/student/img/border-image-golden.png);
+            border-image-slice: 4 4 4 4;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            /*background: url(/student/img/BG3.png) center;*/
+            background-color: rgba(0,0,0,0.5);
+            background-clip: padding-box;
+            background-origin: padding-box;
+        }
+
+        .side_div {
+            height: 5vh;
+        }
+
+        body, html {
+            height: 100%;
+            cursor: url(/student/dist/img/cursor/default.png), auto;
+        }
+
+        .Back {
+            background-image: url(/student/img/GameBack.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 50px;
+            height: 30px;
+            margin: 1em 0px 0px 0.5em;
+            box-sizing: content-box;
+        }
+
+        .MyBtn:hover {
+            cursor: url(/student/dist/img/cursor/point.png), pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row Back MyBtn" onclick="location.href='/Student/Index'"></div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-10 side_div"></div>
+            <div class="col-lg-8 col-10 nav_div">
+                <img src="/student/img/man-workout.png" class="rounded mx-auto d-block" alt="lost" />
+            </div>
+            <div class="col-lg-8 col-10 side_div">
+                <button type="button" class="btn btn-primary MyBtn" onclick="modalBtn()">確認今日成長</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <h5 class="modal-title" id="exampleModalLabel">訓練結果</h5>
+                </div>
+                <div class="modal-body text-center" id="reMsg">
+                    上肢 +0 <br />
+                    核心 +0 <br />
+                    下肢 +0
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary close MyBtn" onclick="modalClose()">確認</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+
+    <script>
+        var modalElement = new bootstrap.Modal(document.getElementById("exampleModal"), {
+            backdrop: 'static',
+            keyboard: false,
+        });
+
+        function modalBtn() {
+            modalElement.show();
+        }
+
+        function modalClose() {
+            modalElement.hide();
+        }
+    </script>
+
+    <script>
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+        connection.on("@Model.Uid", function (str, vit, agi) {
+        document.getElementById("reMsg").innerHTML = `上肢 +${str} <br />
+                        核心 +${vit} <br />
+                        下肢 +${agi}`;
+            modalElement.show();
+        });
+
+        connection
+            .start()
+            .catch(function (err) {
+                return console.error(err.toString());
+            });
+
+
+    </script>
+</body>
+</html>

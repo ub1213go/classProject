@@ -1,0 +1,580 @@
+﻿@model WorkoutHunterV2.Models.DbModels.ForIndex
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <link href ="main.css" rel="stylesheet" type="text/css"> -->
+
+    <title>Main</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+    <!-- include rpgui -->
+    <link href="~/student/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/student/js/bootstrap.min.js" rel="stylesheet">
+    <link href="~/student/dist/rpgui.min.css" rel="stylesheet" type="text/css">
+    <link href="~/student/main.css" rel="stylesheet">
+    <script src="~/student/dist/rpgui.min.js"></script>
+
+
+    <style type="text/css">
+        body {
+            background-image: url(/student/img/indexBG.gif);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            -o-background-size: 100% 100%, auto;
+            -moz-background-size: 100% 100%, auto;
+            -webkit-background-size: 100% 100%, auto;
+            background-size: 100% 100%, auto;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        .header_div {
+            height: 22vh;
+        }
+
+        .nav_div {
+            height: 55vh;
+        }
+
+        .logo_div {
+            background: rgba(255, 255, 255, 0.452);
+            border-radius: 2vh;
+            height: 18vh;
+            text-align: center;
+            line-height: 18vh;
+        }
+
+            .logo_div > img {
+                max-width: 90%;
+            }
+
+        .border_style {
+            border-image-width: 0.5vh;
+            border-width: 0.5vh;
+            box-sizing: border-box;
+            border-image-repeat: repeat;
+            padding: 0.5vh;
+            border-style: solid;
+            border-image-source: url(/student/dist/img/border-image-gold.png);
+            border-image-slice: 3 3 3 3;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            background: rgba(32, 32, 32, 0.637);
+            background-clip: padding-box;
+            background-origin: padding-box;
+        }
+
+
+        .info_div {
+            height: 3vh;
+        }
+
+        .rpgFont_style {
+            color: white;
+            font-style: normal;
+            font-size: 3vw;
+            line-height: 1;
+            text-shadow: 0.2em 0.2em 0.2em black;
+        }
+
+        /* pop div seat */
+        .pop_div {
+            margin-left: 30vh;
+            margin-top: 25vh;
+        }
+
+        /* 8/7 新增 確認完請刪除註解*/
+        .pop_workout {
+            padding: 0;
+            margin: 0;
+            width: 80%;
+            height: 70%;
+            right: 10%;
+            top: 15%;
+            position: fixed;
+            overflow: hidden;
+            background-image: url(/student/img/BG3.png);
+            background-blend-mode: screen;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
+
+        #slot_1, #slot_2, #AdvBtn {
+            image-rendering: optimize-contrast; /* CSS3 Proposed  */
+            image-rendering: crisp-edges; /* CSS4 Proposed  */
+            image-rendering: pixelated; /* CSS4 Proposed  */
+            -ms-interpolation-mode: nearest-neighbor;
+        }
+
+        .coin {
+            width: 30px;
+            height: 30px;
+            background-image: url(/student/img/Coin2.png);
+            -webkit-animation: play 1s steps(7) infinite alternate;
+            animation: play 1s steps(7) infinite alternate;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        @@-webkit-keyframes play {
+            from {
+                background-position: 0px;
+            }
+
+            to {
+                background-position: -210px;
+            }
+        }
+
+        @@keyframes play {
+            from {
+                background-position: 0px;
+            }
+
+            to {
+                background-position: -210px;
+            }
+        }
+
+        .Back {
+            background-image: url(/student/img/GameBack.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 9vw;
+            height: 6vh;
+            margin: 2vw;
+        }
+        @@font-face {
+            font-family: 'somethingwild-Regular';
+            src: url('/student/fonts/somethingwild-Regular.woff') format('woff');
+        }
+
+        .MyAdventureFont {
+            font-family: 'somethingwild-Regular';
+        }
+    </style>
+</head>
+<body>
+    <!-- 目前版面在4K解析度下會跑圖 ==>展示會用手機版面 -->
+    <div class="container-fluid">
+        <div class="center_div">
+            <div class="row">
+                <div class="col-12 header_div">
+                    <div class="row ">
+                        <div class="col-lg-2 col-3 text-center">
+                            <img id="RankPicture" alt="lost" class="img-fluid m-2">
+                        </div>
+                        <div class="col-lg-8 col-9">
+                            <div class="row m-3">
+                                <div class="col-12 border_style rpgFont_style  px-3 ">
+                                    <div>
+                                        <b>   ID：@Model.Uid</b>
+                                    </div>
+                                    <div style="display: flex;align-items: center;">
+                                        <div class="coin">
+                                        </div>
+                                        <b style="align-self: center;">@Model.Money</b>
+                                    </div>
+                                </div>
+                                <div class="col-4 border_style rpgFont_style ">
+                                    <b class="MyS">STR：@Model.Strength</b>
+                                </div>
+                                <div class="col-4 border_style rpgFont_style ">
+                                    <b class="MyS">VIT：@Model.Vitality</b>
+                                </div>
+                                <div class="col-4 border_style rpgFont_style ">
+                                    <b class="MyS">AGI：@Model.Agility</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 ">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-lg-9 col-12 nav_div">
+                            <div class="row">
+                                <div class="col-3 ">
+                                    <div class="logo_div">
+                                        <a href="javascript:void(0)"
+                                           onclick="document.getElementById('openBag').style.display='block';"
+                                           class="btn">
+                                            <img src="/student/img/box.png" alt="" class="img-fluid p-2 Btn">
+                                        </a>
+                                    </div>
+
+                                    <div class="logo_div">
+                                        <a href="javascript:void(0)"
+                                           onclick="document.getElementById('openNew').style.display='block';"
+                                           class="Btn">
+                                            <img src="/student/img/scroll.png" alt="" class="img-fluid p-2 Btn">
+                                        </a>
+                                    </div>
+
+                                    <div class="logo_div">
+                                        <img src="/student/img/shop.png" onclick="location.href='/Student/Shop'" alt="" class="img-fluid p-2 Btn">
+                                    </div>
+                                </div>
+                                <div class="col-6 d-flex align-items-sm-start flex-column">
+                                    <div class="mt-auto text-center">
+                                        <img src="/student/img/main.gif" alt="" class="img-fluid" style="height:50vh;">
+                                    </div>
+                                </div>
+                                <div class="col-3 ">
+                                    <div class="logo_div">
+                                        <a href="javascript:void(0)"
+                                           onclick="document.getElementById('openWorkout').style.display='block';"
+                                           class="btn Btn">
+                                            <img src="/student/img/workout.png" alt="" class="img-fluid p-2">
+                                        </a>
+                                    </div>
+                                    <div class="logo_div">
+                                        <img src="/student/img/skillBook.png" onclick="location.href='/Student/SkillTree'" alt="" class="img-fluid p-2 Btn">
+                                    </div>
+                                    <div class="logo_div">
+                                        <img src="/student/img/setting.png" onclick="location.href='/Student/PasswordChange'" alt="" class="img-fluid p-2 Btn">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-md-4 col-12 info_div"></div>
+                        <div class="col-md-4 col-12 border_style text-center">
+                            <div class="rpgui-icon potion-slot mx-4" id="slot_1"></div>
+                            <div class="rpgui-icon magic-slot mx-4" id="slot_2"></div>
+                        </div>
+                        <div class="col-md-1 col-12">
+                        </div>
+                        <div class="col-md-3 col-12 text-center">
+                            <button type="button" onclick="location.href='/Adventure/Index'" class="btn rpgui-button rpgFont_style m-1 Btn" id="AdvBtn">
+                                <b class="fw-bolder MyAdventureFont">A d v e n t u r e</b>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rpgui-content pop_div" id="openBag" style="display: none; width:auto; height:auto">
+        <div class="rpgui-container framed rpgui-draggable" id="inventory">
+            <div>
+                <a href="javascript:void(0)" onclick="document.getElementById('openBag').style.display='none';">
+                    Close X
+                </a>
+            </div>
+
+
+            <hr />
+
+            @{
+                int index = 0;
+                int tempNumber = 0;
+                for (int i = 0; i < 20; i++)
+                {
+                    if (i != 0 && i % 4 == 0)
+                    {
+                        <br /><br />
+                    };
+                    <div class="rpgui-icon empty-slot">
+                        @if (index < ViewBag.Items.Count)
+                        {
+                            if (i < ViewBag.Items[index].quantity + tempNumber - 1)
+                            {
+                                <div class="itemImg item_001 Btn itemIcon" onclick="pdItem(this)" style="background-image:url('/student/xMallPic/@ViewBag.Items[index].Item.ItemPic')">
+                                    <div class="disc">
+                                        <div class="rpgui-container framed-grey" style="width:100%; height:100%; left:0px; top:0px;">
+                                            <label>@ViewBag.Items[index].Item.ItemInfo</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="itemImg item_001 Btn itemIcon" onclick="pdItem(this)" style="background-image: url('/student/xMallPic/@ViewBag.Items[index].Item.ItemPic');width: 100%;height: 100%;background-size: contain;">
+                                    <div class="disc">
+                                        <div class="rpgui-container framed-grey" style="width:100%; height:100%; left:0px; top:0px;">
+                                            <label>@ViewBag.Items[index].Item.ItemInfo</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                tempNumber += ViewBag.Items[index].quantity;
+                                index++;
+                            }
+                        }
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+
+    <!-- news modal -->
+    <div id="openNew" class="rpgui-content pop_div" style="display:none;">
+        <div class="rpgui-container framed rpgui-draggable" id="inventory">
+            <div>
+                <a href="javascript:void(0)" onclick="document.getElementById('openNew').style.display='none'">
+                    X Close
+                </a>
+            </div>
+            <hr>
+            <div>
+                just write something here to see
+            </div>
+        </div>
+    </div>
+
+    @if (ViewBag.SkillPic != null)
+    {
+        <div style="display:none" id="NowSkillPic">@ViewBag.SkillPic</div>
+    }
+    else
+    {
+        <div style="display:none" id="NowSkillPic"></div>
+    }
+    @if (ViewBag.NowItem != null)
+    {
+        <div style="display:none" id="NowItemPic">@ViewBag.NowItem.ItemPic</div>
+        <div style="display:none" id="NowItemInfo">@ViewBag.NowItem.ItemInfo</div>
+    }
+    else
+    {
+        <div style="display:none" id="NowItemPic"></div>
+        <div style="display:none" id="NowItemInfo"></div>
+    }
+    <div id="SQLrank" style="display:none">@Model.Class</div>
+
+    <!-- workout modal  8/7新增-->
+    <div id="openWorkout" style="display:none;">
+        <div class="border_style pop_workout" id="inventory">
+            <div>
+                <div class="Btn Back" onclick="document.getElementById('openWorkout').style.display='none'">
+                </div>
+                <img src="/student/img/run.gif" alt="" class="img-fluid position-absolute top-50 start-50 translate-middle">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 8/7新增-->
+    <!--<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content border_style bg-dark">
+                <div class="modal-header justify-content-center">
+                    <h5 class="modal-title rpgFont_style" id="exampleModalLabel">Training result</h5>
+                </div>
+                <div class="modal-body text-center lh-lg rpgFont_style">
+                    STR+5 <br> VIT+2 <br> AGI+2
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn rpgui-button rpgFont_style">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <h5 class="modal-title" id="exampleModalLabel">訓練結果</h5>
+                </div>
+                <div class="modal-body text-center" id="reMsg">
+                    STR +0 <br />
+                    VIT +0 <br />
+                    AGI +0
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary close MyBtn" onclick="modalClose()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/student/js/popper.min.js"></script>
+    <script src="/student/js/bootstrap.min.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+
+    <script>
+
+        var RankStage = ["S", "A", "B", "C", "D"];
+        var StrRankPicture = "rankIcon_D.png";
+        for (let i = 0; i < RankStage.length; i++) {
+            if (SQLrank.innerText == RankStage[i])
+                StrRankPicture = `rankIcon_${SQLrank.innerText}.png`;
+        }
+        RankPicture.src = `/student/img/${StrRankPicture}`;
+
+        // 現在技能圖片綁定
+        var img = document.createElement("img");
+        var NowSkillPic = document.querySelector("#NowSkillPic").innerText;
+        if (NowSkillPic != "") {
+            img.src = `/student/img/skill_icon/${NowSkillPic}`;
+            img.style.width = "100%";
+            img.style.height = "100%";
+            img.className = "itemIcon";
+            img.style.verticalAlign = "inherit";
+            document.querySelector("#slot_2").appendChild(img);
+        }
+        ////
+
+        // 現在道具圖片綁定
+        var container = document.createElement("div");
+        var container2 = document.createElement("div");
+        var img = document.createElement("div");
+        var info = document.createElement("label");
+        var NowItemPic = document.querySelector("#NowItemPic").innerText;
+        var NowItemInfo = document.querySelector("#NowItemInfo").innerText;
+        // 製作道具元素
+        if (NowItemPic != "") {
+            container.className = "itemImg item_001 Btn itemIcon";
+            container.style.position = "relative";
+            container.onclick = function () {
+                pdItem(this);
+            }
+            container.style.backgroundImage = `url(/student/xMallPic/${NowItemPic})`;
+            container2.className = "disc";
+            img.className = "rpgui-container framed-grey";
+            img.style.width = "100%";
+            img.style.height = "100%";
+            img.style.left = "0px";
+            img.style.top = "0px";
+            img.style.verticalAlign = "inherit";
+            info.innerText = NowItemInfo;
+
+            container.appendChild(container2);
+            container2.appendChild(img);
+            img.appendChild(info);
+            document.querySelector("#slot_1").appendChild(container);
+        }
+        ////
+
+        // 裝備道具 -> 回傳後端資訊data => 圖片數字，後端儲存
+        function pdItem(e) {
+            //// 元素 ////
+            // 獲取圖片數字
+            var reg = /Icon(\d*).png/;
+            var elementPicture = e.style.backgroundImage;
+            var data = reg.exec(elementPicture)[1];
+            // 裝備道具欄位的道具
+            var equipBox = document.querySelector("#slot_1 div")
+            /////////////////////////
+
+            //// 布林 ////
+            // 取消裝備道具
+            var cancelItem = equipBox == e;
+            if (cancelItem) {
+                data = (parseInt(data) + 100).toString();
+            }
+            ////
+            // 重複道具判定
+            var repeatItem = false;
+            if (equipBox != null)
+                repeatItem = equipBox.style.backgroundImage == e.style.backgroundImage;
+
+            //// 傳送後端資料 ////
+            if (!repeatItem || cancelItem) {
+                var rqs = new XMLHttpRequest();
+                rqs.open("post", "/student/saveNowItem");
+                rqs.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+                rqs.onload = function () {
+                    console.log(rqs.responseText);
+                }
+                rqs.send(`data=${data}`);
+                delete rqs;
+            }
+        }
+        /////////////////////////
+        //裝備藥水:實現藥水單向(若裝備欄內沒藥水可直接裝備)、雙向置換(若裝備欄內已經有藥水，直接點擊新藥水會進行置換)，
+
+        var x = document.getElementsByClassName('rpgui-icon empty-slot')
+        for (let i = 0; i < x.length; i++) {
+            x[i].addEventListener("click", function () {
+                var Data = document.getElementById('slot_1')
+                if (Data.firstElementChild != null) {
+                    var x_baby = x[i].firstElementChild
+                    x_baby.remove();
+                    x_baby.style.position = "relative";
+                    Data.style.position = "static";
+                    x[i].append(Data.firstElementChild)
+                    Data.append(x_baby);
+                }
+                else {
+                    var x_baby = x[i].firstElementChild
+                    x_baby.remove();
+                    x_baby.style.position = "relative";
+                    Data.append(x_baby);
+                }
+            })
+        }
+
+        //解除藥水:可透過點擊下方藥水裝備欄返回藥水回倉庫，會自動找空格填入
+
+        var y = document.getElementById('slot_1')
+        y.addEventListener("click", function () {
+            var y_baby = y.firstElementChild
+            if (y_baby != null) {
+                var Data = document.getElementsByClassName('rpgui-icon empty-slot')
+                y_baby.style.position = "static";
+                for (var i = 0; i <= 19; i++) {
+                    if (Data[i].firstElementChild == null) {
+                        Data[i].append(y_baby);
+                        break;
+                    }
+                }
+            }
+        })
+
+        // 訓練視窗 8/7更新
+        var modalElement = new bootstrap.Modal(document.getElementById("exampleModal"), {
+            backdrop: 'static',
+            keyboard: false,
+        });
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+        function modalBtn() {
+            modalElement.show();
+        }
+        function modalClose() {
+            modalElement.hide();
+            document.getElementById('openWorkout').style.display = 'none';
+        }
+        connection.on("@Model.Uid", function (str, vit, agi) {
+            document.getElementById("reMsg").innerHTML = `STR +${str} <br />
+                        VIT +${vit} <br />
+                        AGI +${agi}`;
+            if (openWorkout.style.display == "block") {
+                modalBtn();
+            }
+            console.log("HI");
+            var x = document.querySelectorAll(".MyS");
+
+            x[0].innerText = `${x[0].innerText.substring(0, 4)}${parseInt(document.querySelectorAll(".MyS")[0].innerText.substring(4)) + parseInt(str)}`
+            x[1].innerText = `${x[1].innerText.substring(0, 4)}${parseInt(document.querySelectorAll(".MyS")[1].innerText.substring(4)) + parseInt(vit)}`
+            x[2].innerText = `${x[2].innerText.substring(0, 4)}${parseInt(document.querySelectorAll(".MyS")[2].innerText.substring(4)) + parseInt(agi)}`
+        });
+
+        connection
+            .start()
+            .catch(function (err) {
+                return console.error(err.toString());
+            });
+
+        document.onkeydown = function (e) {
+            if (e.key == "q") {
+                location.href = "/coach/index";
+            }
+        }
+
+    </script>
+
+</body>
+</html>
+

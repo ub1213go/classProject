@@ -1,0 +1,290 @@
+
+/* Start Global rules */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+/* End Global rules */
+
+/* Start body rules */
+body {
+    /*背景*/
+    background-image:url('../Pic/Logo1.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    -o-background-size: 100% 100%, auto;
+    -moz-background-size: 100% 100%, auto;
+    -webkit-background-size: 100% 100%, auto;
+    background-size: 100% 100%, auto;
+    font-family: 'Vibur', cursive;   
+}
+/* End body rules */
+
+/* Start form  attributes */
+.container {
+    width: 30em;
+    min-height: 30em;
+    border-radius: 1em;
+    margin: auto;
+    box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
+    padding: 5%;
+    background-image: linear-gradient( -225deg, #5c6a88cf 40%, #7d8597 70%);
+}
+
+@media screen and (max-width: 400px) {
+    .container {
+        width: auto;
+    }
+    .myCss2 {
+        margin-left: 60% !important;
+    }
+}
+
+/* form Container */
+form .con {
+    /* display: -webkit-flex; */
+    /* display: flex; */
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin:  auto;    
+}
+
+
+.other{
+    margin:  auto;    
+
+}
+
+
+.other a{
+    text-decoration:none;  /*隱藏超連結底線*/
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    font-family: 'Vibur', cursive;
+}
+
+
+
+/* //////////////////////////////////////////// */
+/* the header form form */
+header {
+    margin: 10% auto 10% auto;
+    text-align: center;
+    position: relative;
+}
+
+/* Login title form form */
+header h2 {
+    font-size: 250%;
+    font-family: "Gill Sans", sans-serif;
+    color: white;
+    text-shadow: 0.2em 0.2em 0.2em black;
+}
+
+/*  A welcome message or an explanation of the login form */
+header p {
+    letter-spacing: 0.05em;
+}
+/* //////////////////////////////////////////// */
+.input-item {
+    background: #fff;
+    color: #333;
+    padding: 0px 0px 0px 9px;
+    border-radius: 5px 0px 0px 5px;
+}
+
+
+/* inputs form  */
+.LoginInput {
+    height: 50px;
+    margin-top: 1%;
+    padding: 15px;
+    font-size: 16px;
+    font-family: 'Abel', sans-serif;
+    color: #5E6472;
+    outline: none;
+    border: none;
+    border-radius: 0px 5px 5px 0px;
+    transition: 0.2s linear;
+    width: calc(100% - 50px);
+}
+
+/* focus  */
+input:focus {
+    transform: translateX(-2px);
+    border-radius: 5px;
+}
+
+/* //////////////////////////////////////////// */
+/* //////////////////////////////////////////// */
+
+/* input[type="text"] {min-width: 250px;} */
+/* buttons  */
+.Bbutton {
+    display: inline-block;
+    color: #252537;
+    width: 100px;
+    height: 50px;
+    padding: 0 20px;
+    background: #fff;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s linear;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Submits */
+.submits {
+    width: 100%;
+    display: inline-block;
+}
+
+/*       Forgot Password button FAF3DD  */
+.frgt-pass {
+    background: transparent;
+}
+
+/*     Sign Up button  */
+.sign-up {
+    background: #8ecae6;
+}
+
+
+/* buttons hover */
+.Bbutton:hover {
+    transform: translatey(3px);
+    box-shadow: none;
+}
+
+/* buttons hover Animation */
+.Bbutton:hover {
+    animation: ani9 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes ani9 {
+    0% {
+        transform: translateY(3px);
+    }
+
+    100% {
+        transform: translateY(5px);
+    }
+}
+
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+    .head-form,.identity,.field-set,.other{
+        margin-top: 0;
+    }
+}
+
+body, html {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.myCss1 {
+    display: block !important;
+    border-radius: 10px;
+}
+
+.myCss2 {
+    margin-left: 80%;
+}
+
+.myCss3 {
+    margin-bottom: 10px;
+}
+
+.MyCss4 {
+    text-align: center;
+}
+
+.MyCss5 {
+    width: 6em;
+    margin-top: 100px;
+}
+
+.MyCssHint {
+    color: red;
+    font-size: 2em;
+    font-weight: bold;
+    font-family: Arial;
+    text-align:center;
+}
+
+.myCssFont {
+    font-size: 2em;
+    font-weight: bold;
+    font-family: Arial;
+    color: white;
+}
+
+.myCssFont2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: Arial;
+    color: white;
+}
+
+.myCssFontShadow {
+    text-shadow: 0.2em 0.2em 0.2em black;
+}
+
+
+.MyCssInputBox {
+    height: 50px;
+    padding: 15px;
+    font-size: 16px;
+    font-family: 'Abel', sans-serif;
+    color: #5E6472;
+    outline: none;
+    border: none;
+    border-radius: 0px 5px 5px 0px;
+    transition: 0.2s linear;
+    width: 100%;
+}
+
+.MyCssInputTitle {
+    left: 10px;
+    top: 10px;
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 10em;
+    font-family: 'Abel', sans-serif;
+    font-weight: bold;
+    background-color: #4cb4f991;
+    border-radius: 1em;
+    text-align: center;
+}
+
+.MyBackButton {
+    background-image: url(/home/Pic/Back.png);
+    background-clip: border-box;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 3em;
+    height: 3em;
+    border: none;
+    border-radius: 0.8em;
+    box-shadow: 0 0 20px 0px #2b2a2a;
+    background-position: center;
+    opacity: 0.8;
+}
+
+.MyBackButton:hover {
+    cursor: pointer;
+}

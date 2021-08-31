@@ -1,0 +1,51 @@
+﻿@model string
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EditPassword</title>
+    <link rel="stylesheet" href="~/home/CSS/bLogin_v2.css">
+</head>
+
+<body>
+    <div class="container MyCss4">
+        <div class="con">
+
+            <header class="head-form">
+                <h2>修改密碼</h2>
+            </header>
+
+
+            <form action="/home/CheckEmail" method="post">
+                <div class="field-set">
+                    <div class="MyInputTitle">請輸入新密碼</div>
+                    <div class="myCss1 fa fa-user-circle input-item">
+                        <input class="MyCssInputBox" name="Password" type="password" placeholder="請輸入新密碼" required>
+                    </div>
+                </div>
+
+                <div class="field-set">
+                    <div class="MyInputTitle">確認新密碼</div>
+                    <div class="myCss1 fa fa-user-circle input-item">
+                        <input class="MyCssInputBox" name="rePassword" type="password" placeholder="確認新密碼" required>
+                    </div>
+                </div>
+                <div class="MyCssHint">@Model</div>
+                <input style="display:none" name="Key" id="userKey" value="@TempData["userKey"]">
+                <button id="MyCheckRePasswordButton" class="MyCss5 log-in Bbutton" style="margin-top:50px">確認</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="~/home/JS/MyJS.js"></script>
+    <script>
+        CreateTitle();
+        
+    </script>
+</body>
+
+</html>

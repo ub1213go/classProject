@@ -1,0 +1,213 @@
+﻿@model WorkoutHunterV2.Models.Student.ViewSkillTreeModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>skill</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+    <!-- include rpgui -->
+    <link href="~/student/main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="myCanvus">
+
+        <div class="Rank">
+            <div id="rankIcon">
+                <div id="rankLV">
+                    <img id="RankPicture" alt="lost" class="img-fluid m-2">
+                </div>
+            </div>
+        </div>
+
+        <div class="LeftObj" style="left: 1%">
+            <div>
+                <div id="str_skill_tree">
+                    <p>STR:@Model.Strength</p>
+                </div>
+                <div id="hp_skill_tree">
+                    <p>VIT:@Model.Vitality</p>
+                </div>
+                <div id="spd_skill_tree">
+                    <p>AGI:@Model.Agility</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="backBtn">
+            <p>MainPage</p>
+        </div>
+
+        <div class="skillTree">
+            <!--技能點總量+目前技能  -->
+            <div id="sk_pt">
+                point:<div id="ptNum" style="font-size: 100px;">@Model.rawPoint</div>
+                @if (Model.nowSkill != 0)
+                {
+                    <div>
+                        目前技能:<div id="sk_now" style="font-size: 50px;">@Model.Skills.ToList()[Convert.ToInt32(Model.nowSkill - 1)].SkillName</div>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        目前技能:<div id="sk_now" style="font-size: 50px;">無技能</div>
+                    </div>
+                }
+            </div>
+
+            <!-- <div class="half-circle"></div>
+            <div class="quarter-circle-top-left"></div>
+            <div class="quarter-circle-top-right"></div>
+            <div class="quarter-circle-bottom-left"></div>
+            <div class="quarter-circle-bottom-right"></div> -->
+            <!-- 所有技能 -->
+            @{
+                string ID;
+                string btnID;
+                string nowSkillBtnID;
+                string CLASS;
+                string LebelID;
+            }
+            @for (int i = 0; i < 8; i++)
+            {
+                ID = $"p{i + 1}";
+                btnID = $"sk{i + 1}";
+                nowSkillBtnID = $"sk{i + 1}_act";
+                CLASS = "SkBtn";
+                LebelID = $"sk{i + 1}_name";
+                if (Model.SkillList.ToList().Contains(i + 1))
+                {
+                    CLASS = "noSkBtn";
+                }
+                <button id=@btnID class=@CLASS onclick="skillClick(this)">
+                    <div id=@ID>@Model.Skills.ToList()[i].NeedPoint</div>
+                    <div class="disc">
+                        <div class="rpgui-container framed-grey" style="width:100%; height:100%; left:0px; top:0px;">
+                            <input class="rpgui-button" style="width:1%;height: 15%;" type="button" value="啟用" id=@nowSkillBtnID onclick="nowSkillClick(this)" disabled>
+                            <label id=@LebelID>@Model.Skills.ToList()[i].SkillName</label>
+                            <hr>
+                            <label>this skill need:@Model.Skills.ToList()[i].NeedPoint point</label>
+                        </div>
+                    </div>
+                </button>
+            }
+
+
+            <!-- 技能升級線 -->
+
+            <div id="up1_5"></div>
+            <div id="up1_8"></div>
+            <div id="up1_2"></div>
+            <div id="up2_3"></div>
+            <div id="up3_4"></div>
+            <div id="up5_6"></div>
+            <div id="up6_7"></div>
+        </div>
+    </div>
+    <div id="SQLrank" style="display:none">@Model.Rank</div>
+    <script src="~/student/skill_tree.js"></script>
+    <script>
+
+        // 根據後端資料，初始化按鈕
+        var length = 8;
+        var tog1 = false;
+        var tog2 = false;
+        for (var i = 0; i < length; i++) {
+            var thisBtn = document.querySelector(`#sk${i + 1}`);
+            // 已學習的技能紐
+            if (thisBtn.className == "noSkBtn") {
+                // 第一招
+                if (i == 0) {
+                    document.querySelector("#up1_5").style.borderColor = "white";
+                    document.querySelector("#up1_8").style.borderColor = "white";
+                    document.querySelector("#up1_2").style.backgroundColor = "white";
+                }
+                if (i + 2 < length && i != 3) {
+                    document.querySelector(`#up${i + 1}_${i + 2}`).style.backgroundColor = "white";
+                }
+                thisBtn.disabled = true;
+                thisBtn.querySelector(".rpgui-button").disabled = false;
+            } else if (thisBtn.className == "SkBtn") {
+                // 未學習的技能紐
+                var r = /\d/g;
+                var index = parseInt(r.exec(thisBtn.id));
+                // 技能線
+                // 1 - 2 - 3 - 4
+                // 5 - 6 - 7
+                // 8
+                if (1 < index && index <= 4) {
+
+                    if (!(document.querySelector(`#sk${index - 1}`).className == "noSkBtn") || tog1) {
+                        thisBtn.className = "noSkBtn";
+                        thisBtn.disabled = true;
+                        tog1 = true;
+                    }
+                }
+                if (5 < index && index <= 7) {
+                    if (!(document.querySelector(`#sk${index - 1}`).className == "noSkBtn") || tog2) {
+                        thisBtn.className = "noSkBtn";
+                        thisBtn.disabled = true;
+                        tog2 = true;
+                    }
+                }
+            }
+
+
+        }
+
+
+
+        var data = {
+            list: [],
+            nowSkill: 0,
+        }
+        // 點擊使用技能鈕
+        function nowSkillClick(e) {
+
+            let x = e.id;
+            var r = /\d{1,2}/g
+            data.nowSkill = parseInt(r.exec(x))
+
+        }
+        // 點擊學習技能鈕
+        function skillClick(e) {
+            let x = e.id;
+            let index = parseInt(x.substring(2, x.length));
+            data.list.push(index);
+            if (cnt > parseInt(document.getElementById(`p${index}`).innerText))
+                e.className = "noSkBtn";
+            // 技能線
+            // 1 - 2 - 3 - 4
+            // 5 - 6 - 7
+            // 8
+            if (1 <= index && index < 4 && cnt > parseInt(document.getElementById(`p${index}`).innerText)) {
+                document.querySelector(`#sk${index + 1}`).className = "SkBtn";
+            }
+            if (5 <= index && index < 7 && cnt > parseInt(document.getElementById(`p${index}`).innerText)) {
+                document.querySelector(`#sk${index + 1}`).className = "SkBtn";
+            }
+
+
+        }
+        // 存檔
+        document.querySelector(".backBtn").onclick = function () {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function () {
+                location.href = "/student/index";
+            }
+            xmlhttp.open("POST", "/student/SkillSaveChange");
+            xmlhttp.setRequestHeader('Content-Type', 'application/json');
+
+            xmlhttp.send(JSON.stringify(data));
+        }
+
+        var RankStage = ["S", "A", "B", "C", "D"];
+        var StrRankPicture = "rankIcon_D.png";
+        for (let i = 0; i < RankStage.length; i++) {
+            if (SQLrank.innerText == RankStage[i])
+                StrRankPicture = `rankIcon_${SQLrank.innerText}.png`;
+        }
+        RankPicture.src = `/student/img/${StrRankPicture}`;
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Game</title>
+    <meta charset="UTF-8">
+    <script src="jquery.min.js"></script>
+    <link rel="stylesheet" href="./beginStyle.css">
+    <link rel="icon" href="./icon_moto.png">
+    
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="gamePic">
+                <div class="human"></div>
+            </div>
+        </div>
+    </div>
+    <script src="./object.js"></script>
+    <script src="./function.js"></script>
+    <script>
+        
+ 
+        $().ready(function () {
+            
+            const FPS = 60;
+           
+            var Open;
+            var Start;
+            // 遊戲開始畫面
+            $(".human").hide();
+            $(".gamePic").append("<div class='open'></div>").css({
+                "background-color": "black",
+                "transition": "background-color 2s",
+            }, 1000)
+                .find(".open").css({
+                    "width": "50px",
+                    "height": "50px",
+                    "background-image": "url('./picMotocycle.png')",
+                    "z-index": "1",
+                    "background-size": "contain",
+                    "background-position": "center",
+                    "background-repeat": "no-repeat",
+                    "position": "absolute"
+                });
+            $(".open").animate({
+                "left": "225px",
+                "top": "50px",
+                "width": "250px",
+                "height": "250px"
+            }, 1000)
+            $(".gamePic").fadeOut();
+            $(".gamePic").fadeIn();
+            $(".gamePic").append("<div class='buttonStart'>Start</div>").find("div:last").css({
+                "color": "white",
+                "position": "absolute",
+                "font-size": "64px",
+                "left": "250px",
+                "top": "330px",
+                "font-weight": "blod",
+                "font-family": "Verdana",
+                "user-select": "none"
+            }).fadeTo(1000, 0.3).hover(function () {
+                $(this).fadeTo(100, 1);
+                $(this).css({
+                    "cursor": "pointer",
+                });
+                $(this).animate({
+                    "font-size": "76px",
+                    "left": "243px",
+                }, 50);
+            }, function () {
+                $(this).fadeTo(100, 0.3);
+                $(this).animate({
+                    "font-size": "64px",
+                    "left": "250px",
+                }, 50);
+                $(this).finish();
+            }).one("click", function () {
+                $(".gamePic").css("background-color", "hsl(180, 100%, 100%, 0)");
+                $(".open").fadeOut(1500);
+                $(Start).fadeOut(1500);
+                setTimeout(function () {
+                    $(".open").remove();
+                    $(".buttonStart").remove();
+                    $(".human").show();
+                    gameStart(FPS);
+                }, 1000)
+            })
+            window.onkeyup = function (event) {
+                if (event.keyCode == 32) {
+                    window.onkeyup = null;
+                    $(".gamePic").css("background-color", "hsl(180, 100%, 100%, 0)");
+                    $(".open").fadeOut(1500);
+                    $(Start).fadeOut(1500);
+                    setTimeout(function () {
+                        $(".open").remove();
+                        $(".buttonStart").remove();
+                        $(".human").show();
+                        gameStart(FPS);
+
+                    }, 1000)
+                }
+            }
+
+        })
+
+    </script>
+</body>
+
+</html>

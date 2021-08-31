@@ -1,0 +1,51 @@
+body {
+    background-image: url('../Pic/Logo1.png');
+    /*背景*/
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    -o-background-size: 100% 100%, auto;
+    -moz-background-size: 100% 100%, auto;
+    -webkit-background-size: 100% 100%, auto;
+    background-size: 100% 100%, auto;
+}
+
+
+
+.side_div {
+    height: 80vh;
+}
+
+.hero-image a {
+    text-decoration: none;  /*隱藏超連結底線*/           
+    color: rgb(0, 0, 0);
+    font-size: 30px;
+    font-family: Trattatello, fantasy;
+}
+
+.hero-text {
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 20px 50px;
+    color: black;
+    background-color: #5c677d;
+    text-align: center;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 30px;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-shadow: 0.2em 0.2em 0.2em #2f2d2d;
+    background-image: linear-gradient( -195deg, #ffffff 40%, #8a8a8a 70%);
+    border-radius: 20px;
+    opacity: 0.5;
+}
+.hero-text:hover{
+    opacity:1;
+}

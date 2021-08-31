@@ -1,0 +1,43 @@
+body{
+    background-image: linear-gradient(rgba(255,255,255,0),rgba(0,0,0,0)), url('./background.jpg');
+    background-repeat: repeat-x;
+    background-size:cover;
+    overflow: hidden;
+}
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
+}
+.content {
+    flex-grow: 5;
+    flex-basis: 0px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+   
+}
+.gamePic {
+    display: flex;
+    align-self: center;
+    width: 700px;
+    height: 550px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 5px 5px 5px;
+    box-sizing: content-box;
+    border-radius: 15px;
+}
+.human {
+    position: absolute;
+    z-index: 1;
+    width: 50px;
+    height: 50px;
+    background-image: url("./human.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+}

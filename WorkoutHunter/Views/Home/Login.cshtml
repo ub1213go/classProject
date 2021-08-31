@@ -1,0 +1,74 @@
+﻿@model string
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="~/home/CSS/bLogin_v2.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+
+
+<body>
+        <div class="container">
+            
+                
+
+                <header class="head-form">
+                    <h2>Log In</h2>
+                </header>
+
+                <form class="field-set" action="/home/Login" method="post">
+
+                    <div class="myCss1 fa fa-user-circle input-item">
+                        <input class="LoginInput" name="Email" id="txt-input" type="text" placeholder="請輸入帳號" required>
+                    </div>
+
+                    <br>
+
+                    <div class="myCss1 fa fa-key input-item">
+                        <input class="LoginInput" type="password" placeholder="請輸入密碼" id="pwd" name="Password" required>
+                    </div>
+
+
+                    <br>
+                    <div class="MyCssHint">@Model</div>
+                    <button class="log-in myCss2 Bbutton">確認</button>
+                </form>
+
+
+                <div class="other">
+
+                    <button class="btn submits frgt-pass myCss3 Bbutton" onclick="location.href='/home/ForgotPassword'">
+                        忘記密碼
+                    </button>
+                    <button class="btn submits sign-up Bbutton" onclick="location.href='/home/Register'">
+                        註冊<div class="fa fa-user-plus" aria-hidden="true"></div>
+                    </button>
+
+                </div>
+         </div>
+        <!-- End Form -->
+    <script>
+        document.onkeydown = function (e) {
+            if (e.key == "q") {
+                document.querySelectorAll(".LoginInput")[0].value = "Bose@gmail.com";
+                document.querySelectorAll(".LoginInput")[1].value = "CvjojCcl0J";
+            }
+            if (e.key == "w") {
+                document.querySelectorAll(".LoginInput")[0].value = "Fiio@gmail.com";
+                document.querySelectorAll(".LoginInput")[1].value = "AXyCg3hgCd";
+            }
+        }
+    </script>
+</body>
+
+</html>
+

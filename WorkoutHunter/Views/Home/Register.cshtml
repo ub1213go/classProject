@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered</title>
+    <link rel="stylesheet" href="~/home/CSS/bLogin_v2.css">
+
+</head>
+<body>
+    <div class="container MyCss4">
+        <form action="/home/Register" method="post">
+            <div class="con">
+                <div class="MyBackButton" onclick="location.href='/home/Login'">
+
+                </div>
+
+                <header class="head-form" style="margin-top:0px">
+                    <h2>註　冊</h2>
+                </header>
+                <h2 class="identity myCssFont2">
+                    身分別：
+                    <input type="radio" name="role" value="S"><label for="stu">   學員</label>
+                    <input type="radio" name="role" value="C"><label for="coach">   教練</label>
+                </h2>
+
+                <br>
+
+                <div class="field-set">
+                    <div class="MyInputTitle">請輸入姓名</div>
+                    <div class="myCss1 fa fa-user-circle input-item">
+                        <input class="MyCssInputBox" name="Name" type="text" placeholder="請輸入姓名" required>
+                    </div>
+                </div>
+                <div class="field-set">
+                    <div class="MyInputTitle">請輸入Google信箱</div>
+                    <div class="myCss1 fa fa-user-circle input-item">
+                        <input class="MyCssInputBox" name="Email" type="text" placeholder="請輸入Google信箱" required>
+                    </div>
+                </div>
+                <div class="field-set">
+                    <div class="MyInputTitle">請輸入密碼</div>
+                    <div class="myCss1 fa fa-user-circle input-item">
+                        <input class="MyCssInputBox" name="Password" type="password" placeholder="請輸入密碼" required>
+                    </div>
+                </div>
+                <div class="field-set">
+                    <div class="MyInputTitle">確認密碼</div>
+                    <div class="myCss1 fa fa-user-circle input-item">
+                        <input class="MyCssInputBox" name="rePassword" type="password" placeholder="確認密碼" required>
+                    </div>
+                </div>
+                <div class="MyCssHint">@TempData["errorMsg"]</div>
+                <button class="MyCss5 log-in Bbutton" style="margin-top:50px">確認</button>
+            </div>
+        </form>
+    </div>
+    <script src="~/home/JS/MyJS.js" ></script>
+    <script>
+        CreateTitle();
+
+        function auto(btn, name, mail, ps, reps) {
+            var x1 = document.querySelector(".identity");
+            var x2 = document.querySelectorAll(".MyCssInputBox");
+            if (btn == 1) {
+                x1.firstElementChild.checked = true;
+            }
+            else {
+                x1.lastElementChild.previousSibling.checked = true;
+            }
+            x2[0].value = name;
+            x2[1].value = mail;
+            x2[2].value = ps;
+            x2[3].value = reps;
+
+        }
+        document.onkeydown = function (e) {
+            if (e.key == "q") {
+                var name = "Banana";
+                var mail = "Banana@yhaoo.com.tw"
+                var ps = "12345678";
+                var reps = "12345678"
+                auto(1, name, mail, ps, reps);
+            }
+            if (e.key == "w") {
+                var name = "Banana";
+                var mail = "Banana@gamil.com"
+                var ps = "12345678";
+                var reps = "12345678"
+                auto(1, name, mail, ps, reps);
+            }
+        }
+
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,292 @@
+﻿@model List<WorkoutHunterV2.Models.DbModels.UserInfo>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>學員註冊</title>
+    <link rel="stylesheet" href="~/coach/newCoach.css" />
+    <script src="~/coach/jquery.js"></script>
+    <link rel="stylesheet" href="~/coach/bootstrap.min.css" />
+    <script src="~/coach/bootstrap.min.js"></script>
+    <script src="~/coach/popper.min.js"></script>
+    <style type="text/css">
+        .bglmg {
+            width: 100%;
+            height: 100vh;
+            background-image: url(/coach/img/背景2.png);
+            background-size: cover;
+            z-index: 1;
+            overflow-y: auto;
+            max-width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="bglmg">
+        <div class="container-fluid containerSet">
+            <div class="row row-cols-lg-2" id="fillrow">
+                <div class="col-sm-3 col-lg-3 col-xl-3" style="align-items: center; text-align: center">
+                    <nav class="navbar navbar-dark" id="navbarTitle">
+                        <div class="container-fluid">
+                            <button class="navbar-toggler"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#navbarToggleExternalContent"
+                                    aria-controls="navbarToggleExternalContent"
+                                    aria-expanded="false"
+                                    aria-label="Toggle navigation "
+                                    style="position: relative; color: rgb(87, 85, 85); background: rgb(87, 85, 85); width: 530px">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                        </div>
+                    </nav>
+                    <div class="collapse" id="navbarToggleExternalContent">
+                        <div class="t" style="text-align: center">
+                            <h5 class="text-white h4" style="margin-bottom: 0px; background: rgb(15, 209, 209); width: 100%">學員</h5>
+                            <div id="coachid" style="display:none;">@User.Claims.Single(o => o.Type == "ID")</div>
+                            <ul id="stList" class="students" style="border: none; list-style-type: none; padding-left: 0px; margin-bottom: 0px">
+
+                                @foreach (var item in Model)
+                                {
+                    <li class="student">
+                        <button class="tablinks"  onclick="student_display(event, '@item.Uid', '@item.Name')" id="defaultOpen">
+                            @item.Uid <br>
+                            @item.Name
+                        </button>
+                    </li>}
+                            </ul>
+                        </div>
+                        <!-- 設定(齒輪) -->
+                        <button id="setbtn" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <img src="/coach/img/settings.png" alt="" style="width: 100px; height: 100px; align-items: center" />
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-sm-9 col-lg-9 col-xl-9" style="align-items: center;text-align: center;">
+                    <!-- 填寫學員基本資料和初始值之區域 -->
+                    <div class="StudentInformationOut">
+                        <form action="" method="post" id="StudentInformation">
+                            <div style="border-bottom: 2px white solid ;">
+                                <h1>註冊帳號</h1>
+                            </div>
+
+                            <!-- 填寫學員基本資料區 -->
+                            <!-- 學員 -->
+                            <div class="row myMargin">
+                                <div class="col-sm-3 StudentContentFormat text-sm-end">
+                                    <h2>學員姓名</h2>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input class="st_inputName" id="SName" name="Name"
+                                           style=" text-align: center;">
+                                </div>
+                            </div>
+                            <div class="row myMargin">
+                                <div class="col-sm-3 StudentContentFormat text-sm-end">
+                                    <h2>學員ID</h2>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input class="st_inputName" id="SID" name="UID"
+                                           style=" text-align: center;">
+                                </div>
+                            </div>
+
+                            <!-- 上肢 -->
+                            <div class="row myMargin">
+                                <div class="col-sm-3 StudentContentFormat text-sm-end">
+                                    <h2>上肢</h2>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input class="st_inputName" id="n1"
+                                           style=" text-align: center;">
+
+                                </div>
+                            </div>
+
+                            <!-- 核心 -->
+                            <div class="row myMargin">
+                                <div class="col-sm-3 StudentContentFormat text-sm-end">
+                                    <h2>核心</h2>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input class="st_inputName" id="n2"
+                                           style=" text-align: center;">
+
+                                </div>
+                            </div>
+                            <!-- 下肢 -->
+                            <div class="row myMargin">
+                                <div class="col-sm-3 StudentContentFormat text-sm-end">
+                                    <h2>下肢</h2>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input class="st_inputName" id="n3"
+                                           style=" text-align: center;">
+
+                                </div>
+                            </div>
+
+                            <!-- 確認取消區 -->
+                            <div class="row">
+                                <div class="col-sm-4">
+                                </div>
+                                <div class="col-sm-4 select_btn">
+                                    <button type="button" id="select_determine" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#submitwindow">
+                                        送出
+                                    </button>
+                                </div>
+
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+
+                <script src="~/coach/CoachRegistered.js"></script>
+            </div>
+        </div>
+    </div>
+
+    <!-- 案設定(齒輪)之後出現隻畫面(Bootstrap) -->
+    <div class="modal fade"
+         id="staticBackdrop"
+         data-bs-backdrop="static"
+         data-bs-keyboard="false"
+         tabindex="-1"
+         aria-labelledby="staticBackdropLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div style="text-align: center; width: 760px">
+                        <h5 class="modal-title" id="staticBackdropLabel" style="display: inline-block">系統設定</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 0%"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <a href="/Coach/Index" class="btn btn-brown btn-primary">教練首頁</a>
+                        <a href="/Home/Logoff" class="btn btn-brown btn-primary">帳號登出</a>
+                        <a href="/Home/ForgotPassword" class="btn btn-brown btn-primary">修改密碼</a>
+                    </div>
+                    <br /><br />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="exit" class="btn btn-primary" data-bs-dismiss="modal">離開</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--確認送出資料 視窗 -->
+    <div class="modal fade"
+         id="submitwindow"
+         data-bs-backdrop="static"
+         data-bs-keyboard="false"
+         tabindex="-1"
+         aria-labelledby="submitwindowLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div style="text-align: center; width: 760px">
+                        <h5 class="modal-title" id="submitwindowLabel" style="display: inline-block">確認送出</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 0%"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-grid gap-2 col-6 mx-auto" style="text-align:center">
+                        <div id="checkMsg" style="text-align:left">
+                            確認登錄學員關係嗎?
+                            <hr>
+                            學員姓名： <br>
+                            學員ID： <br>
+                            教練ID：
+                        </div>
+                    </div>
+                    <br /><br />
+                </div>
+                <div class="modal-footer">
+                    <form action="/Coach/Register" method="post" id="RePut">
+                        <input id="str" name="str" style="display:none" />
+                        <input id="vit" name="vit" style="display:none" />
+                        <input id="agi" name="agi" style="display:none" />
+                        <input id="uid" name="uid" style="display:none" />
+                        <input id="cid" name="cid" style="display:none" />
+                        <button type="button" id="exit" class="btn btn-danger" data-bs-dismiss="modal">取消</button>
+                        <button type="submit" id="exit" class="btn btn-success" data-bs-dismiss="modal">確認</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        var FormPut = document.getElementById("RePut");
+
+        FormPut.addEventListener("submit", function () {
+            alert("學員關係已註冊完畢");
+        });
+
+
+        document.getElementById("select_determine").addEventListener("click", function () {
+            var name = document.getElementById("SName").value;
+            var id = document.getElementById("SID").value;
+            var coach = document.getElementById("coachid").innerText.toString().substring(4);
+
+            var str = document.getElementById("n1").value;
+            var vit = document.getElementById("n2").value;
+            var agi = document.getElementById("n3").value;
+
+            document.getElementById("str").value = document.getElementById("n1").value;
+            document.getElementById("vit").value = document.getElementById("n2").value;
+            document.getElementById("agi").value = document.getElementById("n3").value;
+            document.getElementById("uid").value = id;
+            document.getElementById("cid").value = coach;
+
+            console.log(name);
+            console.log(id);
+
+            document.getElementById("checkMsg").innerHTML =
+                `確認登錄學員關係嗎？
+                <hr>
+                學員姓名：【${name}】
+                <hr>
+                學員ID：【${id}】
+                <hr>
+                上肢：【${str}】 || 核心：【${vit}】 || 下肢：【${agi}】
+                <hr>
+                教練ID：【${coach}】
+                <hr>`
+        });
+        var reg = /show/;
+        var IsShow = false;
+        var t = navbarToggleExternalContent.className;
+        document.querySelector(".navbar-toggler").addEventListener("click", function () {
+            if (reg.exec(t) == null) {
+                SName.value = "";
+                SID.value = "";
+                n1.value = "";
+                n2.value = "";
+                n3.value = "";
+                tablinks = document.getElementsByClassName("tablinks"); // 學員按鈕  tablinks=>按鈕的class
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    tablinks[i].className = tablinks[i].className.replace(" MySelectBtn", "");
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

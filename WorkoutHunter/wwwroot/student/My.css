@@ -1,0 +1,131 @@
+﻿body {
+    background-color: rgba(0, 0, 0, .6);
+    background-blend-mode: multiply;
+    background-size: cover;
+}
+
+.nav_div {
+    border-image-width: 1.5vh;
+    border-width: 1.5vh;
+    box-sizing: border-box;
+    border-image-repeat: repeat;
+    padding: 0px 3vh 2vh 3vh;
+    border-style: solid;
+    border-image-source: url("/student/dist/img/border-image-golden.png");
+    border-image-slice: 4 4 4 4;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background: url("/student/dist/img/background-image-golden.png") center;
+    background-clip: padding-box;
+    background-origin: padding-box;
+    image-rendering: optimize-contrast; /* CSS3 Proposed  */
+    image-rendering: crisp-edges; /* CSS4 Proposed  */
+    image-rendering: pixelated; /* CSS4 Proposed  */
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+.boder_div {
+    border-image-width: 1vh;
+    border-width: 1vh;
+    box-sizing: border-box;
+    border-image-repeat: repeat;
+    padding: 2vh;
+    border-style: solid;
+    border-image-source: url("/student/dist/img/border-image.png");
+    border-image-slice: 4 4 4 4;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background: url("/student/dist/img/background-image-grey.png") center;
+    background-clip: padding-box;
+    background-origin: padding-box;
+    margin: 0;
+    padding: 0;
+    image-rendering: optimize-contrast; /* CSS3 Proposed  */
+    image-rendering: crisp-edges; /* CSS4 Proposed  */
+    image-rendering: pixelated; /* CSS4 Proposed  */
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+.rpgFont {
+    color: white;
+    text-shadow: 2px black;
+    font-family: 'Press Start 2P';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Press Start 2P'), local('PressStart2P-Regular'), url(https://fonts.gstatic.com/s/pressstart2p/v4/8Lg6LX8-ntOHUQnvQ0E7o3uGXJk6cuEylToZ-uuaubQ.ttf) format('truetype')
+}
+
+.commodity_div {
+    height: 70vh;
+    overflow: auto;
+}
+
+.img {
+    image-rendering: optimize-contrast; /* CSS3 Proposed  */
+    image-rendering: crisp-edges; /* CSS4 Proposed  */
+    image-rendering: pixelated; /* CSS4 Proposed  */
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+body {
+    cursor: url("img/cursor/default.png"), auto;
+    user-select: none;
+}
+
+.btn {
+    cursor: url("img/cursor/point.png"), auto !important;
+}
+
+.money {
+    background-image: url(/student/dist/img/background-image-grey.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    font-family: 'Press Start 2P';
+    font-size: 30px;
+    color: aliceblue;
+    border-image-source: url(/student/dist/img/border-image-golden.png);
+    border-image-slice: 4 4 4 4;
+    border-style: solid;
+    border-image-width: 1.5vh;
+}
+
+@media(max-width:800px){
+    .money {
+        font-size: 20px;
+    }
+    
+}
+@media(max-width:400px){
+    .rpgui-button {
+        background-size: 50% 80%;
+    }
+}
+
+@media(min-width:1500px){
+    .rpgFont{
+        font-size: 30px;
+    }
+}
+@media(max-width:1500px) {
+    .rpgFont {
+        font-size: 20px;
+    }
+}
+
+.topnav_box::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+}
+
+.topnav_box::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #0000004d;
+}
+
+.topnav_box::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background: linear-gradient(to left, #802020, #fcb301 50%, #d27d2c)
+} 
