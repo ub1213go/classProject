@@ -12,10 +12,14 @@ namespace lab_system
             // Head 為 易貨單的上線Position
             // Left 為 易貨單的左邊下線Position
             // Live 為 易貨單是否還存活
+            // ID 為 COrder系統編號，可以對照會員編號
 
             // ==================使用方式=============================
             // 先建立一個COrderTree
-            // 建構子參數number為放入資料庫最後的position
+            // 建構子:
+            //      參數number為放入資料庫最後的Position，意思是最後一筆易貨單的Position
+            //      如果抓不到Position，則不需要放參數
+            // 
             // 使用Tree.AddOrder();建立新的易貨單並回傳這筆易貨單的物件
             // ======================================================
 
@@ -23,42 +27,51 @@ namespace lab_system
             // OrderAddTime為易貨單增加易貨次數時的事件
             // OrderFull為易貨單符合完成2次易貨次數時增加關聯性與發生的事件
 
-            Console.WriteLine("Hello World!");
-            COrderTree Tree = new COrderTree(0);
+            COrderTree Tree = new COrderTree();
             // 假設是資料庫
             List<COrder> db = new List<COrder>();
-            Tree.OrderAdd += delegate (object sender, MyEvent e)
-            {
-                db.Add(e.Order);
-            };
             // sender = Tree & e = head position
             Tree.OrderAddTime += delegate (object sender, MyEvent e)
             {
+                // 模擬從資料庫取出e的Head易貨單
                 COrder o = db.Find(x => x.GetLastOrderPosition().Position == e.Order.GetLastOrderPosition().Head);
-                // 增加次數
-                o.AddTime();
-                // 發錢的事件
-                Console.WriteLine($"ID {o.id} 收入+200 & nowTime: {o.nowTime}");
-                Console.WriteLine();
+                // 死亡
+                AddTimeState s = o.AddTime();
+                if (s == AddTimeState.success || s == AddTimeState.dead)
+                {
+                    Console.WriteLine($"ID {o.ID} 收入+200 & nowTime: {o.nowTime}");
+                    Console.WriteLine();
+                    if(s == AddTimeState.dead)
+                    {
+                        o.DeadTime = DateTime.Now;
+                        Console.WriteLine($"ID {o.ID} 結束");
+                        Console.WriteLine($"結束時間 {o.DeadTime}");
+                        Console.WriteLine();
+                    }
+                }
+                else if(s == AddTimeState.fail)
+                {
+                    // 異常處理
+                    Console.WriteLine("異常");
+                    Console.WriteLine();
+                }
+
             };
+            // 完成兩次易貨條件
             Tree.OrderFull += delegate (object sender, MyEvent e)
             {
+                COrder o = db.Find(x => x.GetLastOrderPosition().Position == e.Order.GetLastOrderPosition().Head);
                 // 如果e的Head物件是live的狀態，新增Head易貨單關聯性
-                if (db[e.Order.GetLastOrderPosition().Head - 1].live)
+                if (o.isLive)
                 {
-                    db[e.Order.GetLastOrderPosition().Head - 1].Positions.Add(new CPosition());
-                    Tree.AddOrder(OldOrder: db[e.Order.GetLastOrderPosition().Head - 1]);
+                    o.Positions.Add(new CPosition());
+                    Tree.AddOrder(OldOrder: o);
                 }
             };
-            Tree.AddOrder();
-            Tree.AddOrder();
-            Tree.AddOrder();
-            Tree.AddOrder();
-            Tree.AddOrder();
-            Tree.AddOrder();
-            Tree.AddOrder();
-            Tree.AddOrder();
-            Tree.AddOrder();
+            for(int i = 0; i < 15; i++)
+            {
+                db.Add(Tree.AddOrder(4));
+            }
         }
 
     }
@@ -66,17 +79,31 @@ namespace lab_system
     public class COrder
     {
         // 系統易貨單編號
-        public int id;
-        // 易貨次數上限
+        public int ID;
+        // 最大易貨次數
         public int maxTime;
-        public int nowTime = 0;
+        // 目前易貨次數
+        public int nowTime;
         // 存活
-        public bool live = true;
+        public bool isLive = true;
+        // 所有位置
         public List<CPosition> Positions { get; set; } = new List<CPosition>();
+        // 建立時間
+        public DateTime StarTime;
+        // 到期時間
+        public DateTime EndTime;
+        // 是否展延
+        public bool IsExpand;
+        // 結束時間
+        public DateTime DeadTime;
 
         public COrder(int pmaxTime, int pid = 0)
         {
-            id = pid;
+            IsExpand = false;
+            StarTime = DateTime.Now;
+            EndTime = DateTime.Now.AddMonths(6);
+            ID = pid;
+            nowTime = 0;
             maxTime = pmaxTime;
         }
         
@@ -93,16 +120,29 @@ namespace lab_system
             if (n > Positions.Count - 1) return null;
             return Positions[n];
         }
-        public bool AddTime()
+        public AddTimeState AddTime()
         {
-            if(nowTime + 1 >= maxTime)
+            if (isLive && nowTime + 1 <= maxTime)
             {
-                nowTime = maxTime;
-                live = false;
-                return false;
+                nowTime++;
+                if (nowTime == maxTime)
+                {
+                    isLive = false;
+                    return AddTimeState.dead;
+                }
+                return AddTimeState.success;
             }
-            nowTime++;
-            return true;
+            return AddTimeState.fail;
+
+
+            //if(nowTime + 1 >= maxTime)
+            //{
+            //    nowTime = maxTime;
+            //    isLive = false;
+            //    return false;
+            //}
+            //nowTime++;
+            //return true;
         }
     }
     // 位置
@@ -118,19 +158,17 @@ namespace lab_system
     // 易貨單樹
     public class COrderTree
     {
-        public int id;
+        public int ID;
         // 易貨單總數
         public int Number { get; set; }
         // 有易貨次數變更時
         public event EventHandler<MyEvent> OrderAddTime;
         // 有易貨單達成完成2次易貨新增條件時
         public event EventHandler<MyEvent> OrderFull;
-        // 新增易貨單時
-        public event EventHandler<MyEvent> OrderAdd;
-        public COrderTree(int number)
+        public COrderTree(int number = 0)
         {
             Number = number;
-            id = number;
+            ID = number;
         }
         public COrder AddOrder(int maxTime = 20, COrder OldOrder = null)
         {
@@ -140,8 +178,8 @@ namespace lab_system
             // 新增易貨單
             if (OldOrder == null)
             {
-                id++;
-                Order = new COrder(maxTime, id);
+                ID++;
+                Order = new COrder(maxTime, ID);
             }
             else
             {
@@ -169,8 +207,9 @@ namespace lab_system
             p.Right = (int)(p.Position + Math.Pow(2, stage)) + queue;
             // ==========================================================================
 
-            // 輸出
-            Console.WriteLine($"ID: {Order.id}");
+            // 測試Test
+            // ==========================================================================
+            Console.WriteLine($"ID: {Order.ID}");
             Console.WriteLine($"Stage: {stage + 1}");
             Console.WriteLine($"Queue: {queue}");
             Console.WriteLine($"Head: {p.Head}");
@@ -179,13 +218,13 @@ namespace lab_system
             Console.WriteLine($"maxTime: {Order.maxTime}");
             Console.WriteLine($"nowTime: {Order.nowTime}");
             if (Order.Positions.Count != 0)
-                Console.WriteLine($"Position: {Order.Positions[Order.Positions.Count - 1].Position}");
-            Console.WriteLine($"Live: {Order.live}");
+                Console.WriteLine($"Position: {p.Position}");
+            Console.WriteLine($"Live: {Order.isLive}");
             Console.WriteLine();
+            // ==========================================================================
 
             // 事件
             // ==========================================================================
-            OnOrderAdd(new MyEvent(Order));
             if (p.Position != 1)
             {
                 // 觸發易貨次數
@@ -200,11 +239,6 @@ namespace lab_system
 
             return Order;
         }
-        // 是否存在
-        public bool IsExist(int position)
-        {
-            return position <= Number;
-        }
         protected virtual void OnOrderAddTime(MyEvent e)
         {
             EventHandler<MyEvent> handler = OrderAddTime;
@@ -217,12 +251,6 @@ namespace lab_system
             if (handler != null)
                 handler.Invoke(this, e);
         }
-        protected virtual void OnOrderAdd(MyEvent e)
-        {
-            EventHandler<MyEvent> handler = OrderAdd;
-            if (handler != null)
-                handler.Invoke(this, e);
-        }
     }
     public class MyEvent : EventArgs
     {
@@ -232,5 +260,10 @@ namespace lab_system
             Order = pOrder;
         }
     }
-
+    public enum AddTimeState : byte
+    {
+        success = 0,
+        dead = 1,
+        fail = 2,
+    }   
 }
