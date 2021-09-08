@@ -1,11 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net5.0-windows7.0": {}
+    "net5.0": {}
   },
   "libraries": {},
   "projectFileDependencyGroups": {
-    "net5.0-windows7.0": []
+    "net5.0": []
   },
   "packageFolders": {
     "C:\\Users\\ub\\.nuget\\packages\\": {},
@@ -15,11 +15,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ub\\Desktop\\git\\Emulator\\Emulator.csproj",
-      "projectName": "Emulator",
-      "projectPath": "C:\\Users\\ub\\Desktop\\git\\Emulator\\Emulator.csproj",
+      "projectUniqueName": "C:\\Users\\ub\\Desktop\\c_sharp_lab\\lab_system\\lab_system.csproj",
+      "projectName": "lab_system",
+      "projectPath": "C:\\Users\\ub\\Desktop\\c_sharp_lab\\lab_system\\lab_system.csproj",
       "packagesPath": "C:\\Users\\ub\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ub\\Desktop\\git\\Emulator\\obj\\",
+      "outputPath": "C:\\Users\\ub\\Desktop\\c_sharp_lab\\lab_system\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -32,15 +32,15 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net5.0-windows7.0"
+        "net5.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net5.0-windows7.0": {
-          "targetAlias": "net5.0-windows",
+        "net5.0": {
+          "targetAlias": "net5.0",
           "projectReferences": {}
         }
       },
@@ -51,8 +51,8 @@
       }
     },
     "frameworks": {
-      "net5.0-windows7.0": {
-        "targetAlias": "net5.0-windows",
+      "net5.0": {
+        "targetAlias": "net5.0",
         "imports": [
           "net461",
           "net462",
@@ -66,9 +66,6 @@
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
-          },
-          "Microsoft.WindowsDesktop.App.WindowsForms": {
-            "privateAssets": "none"
           }
         },
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"

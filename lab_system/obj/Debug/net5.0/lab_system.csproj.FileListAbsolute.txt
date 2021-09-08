@@ -1,0 +1,16 @@
+C:\Users\ub\Desktop\c_sharp_lab\lab_system\bin\Debug\net5.0\lab_system.exe
+C:\Users\ub\Desktop\c_sharp_lab\lab_system\bin\Debug\net5.0\lab_system.deps.json
+C:\Users\ub\Desktop\c_sharp_lab\lab_system\bin\Debug\net5.0\lab_system.runtimeconfig.json
+C:\Users\ub\Desktop\c_sharp_lab\lab_system\bin\Debug\net5.0\lab_system.runtimeconfig.dev.json
+C:\Users\ub\Desktop\c_sharp_lab\lab_system\bin\Debug\net5.0\lab_system.dll
+C:\Users\ub\Desktop\c_sharp_lab\lab_system\bin\Debug\net5.0\ref\lab_system.dll
+C:\Users\ub\Desktop\c_sharp_lab\lab_system\bin\Debug\net5.0\lab_system.pdb
+C:\Users\ub\Desktop\c_sharp_lab\lab_system\obj\Debug\net5.0\lab_system.csprojAssemblyReference.cache
+C:\Users\ub\Desktop\c_sharp_lab\lab_system\obj\Debug\net5.0\lab_system.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ub\Desktop\c_sharp_lab\lab_system\obj\Debug\net5.0\lab_system.AssemblyInfoInputs.cache
+C:\Users\ub\Desktop\c_sharp_lab\lab_system\obj\Debug\net5.0\lab_system.AssemblyInfo.cs
+C:\Users\ub\Desktop\c_sharp_lab\lab_system\obj\Debug\net5.0\lab_system.csproj.CoreCompileInputs.cache
+C:\Users\ub\Desktop\c_sharp_lab\lab_system\obj\Debug\net5.0\lab_system.dll
+C:\Users\ub\Desktop\c_sharp_lab\lab_system\obj\Debug\net5.0\ref\lab_system.dll
+C:\Users\ub\Desktop\c_sharp_lab\lab_system\obj\Debug\net5.0\lab_system.pdb
+C:\Users\ub\Desktop\c_sharp_lab\lab_system\obj\Debug\net5.0\lab_system.genruntimeconfig.cache
