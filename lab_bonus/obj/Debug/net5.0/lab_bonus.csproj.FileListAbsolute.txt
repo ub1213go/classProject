@@ -1,0 +1,16 @@
+C:\Users\ub\Desktop\git\lab_bonus\bin\Debug\net5.0\lab_bonus.exe
+C:\Users\ub\Desktop\git\lab_bonus\bin\Debug\net5.0\lab_bonus.deps.json
+C:\Users\ub\Desktop\git\lab_bonus\bin\Debug\net5.0\lab_bonus.runtimeconfig.json
+C:\Users\ub\Desktop\git\lab_bonus\bin\Debug\net5.0\lab_bonus.runtimeconfig.dev.json
+C:\Users\ub\Desktop\git\lab_bonus\bin\Debug\net5.0\lab_bonus.dll
+C:\Users\ub\Desktop\git\lab_bonus\bin\Debug\net5.0\ref\lab_bonus.dll
+C:\Users\ub\Desktop\git\lab_bonus\bin\Debug\net5.0\lab_bonus.pdb
+C:\Users\ub\Desktop\git\lab_bonus\obj\Debug\net5.0\lab_bonus.csprojAssemblyReference.cache
+C:\Users\ub\Desktop\git\lab_bonus\obj\Debug\net5.0\lab_bonus.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ub\Desktop\git\lab_bonus\obj\Debug\net5.0\lab_bonus.AssemblyInfoInputs.cache
+C:\Users\ub\Desktop\git\lab_bonus\obj\Debug\net5.0\lab_bonus.AssemblyInfo.cs
+C:\Users\ub\Desktop\git\lab_bonus\obj\Debug\net5.0\lab_bonus.csproj.CoreCompileInputs.cache
+C:\Users\ub\Desktop\git\lab_bonus\obj\Debug\net5.0\lab_bonus.dll
+C:\Users\ub\Desktop\git\lab_bonus\obj\Debug\net5.0\ref\lab_bonus.dll
+C:\Users\ub\Desktop\git\lab_bonus\obj\Debug\net5.0\lab_bonus.pdb
+C:\Users\ub\Desktop\git\lab_bonus\obj\Debug\net5.0\lab_bonus.genruntimeconfig.cache

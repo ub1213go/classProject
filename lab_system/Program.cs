@@ -23,14 +23,17 @@ namespace lab_system
             // 使用Tree.AddOrder();建立新的易貨單並回傳這筆易貨單的物件
             // ======================================================
 
-            // OrderAdd為新增易貨單時的事件
             // OrderAddTime為易貨單增加易貨次數時的事件
             // OrderFull為易貨單符合完成2次易貨次數時增加關聯性與發生的事件
+
+            int youMoneyBag = 0;
+            Console.Write("你的ID是: ");
+            string youID = Console.ReadLine();
+            int youIDInt = Convert.ToInt32(youID);
 
             COrderTree Tree = new COrderTree();
             // 假設是資料庫
             List<COrder> db = new List<COrder>();
-            // sender = Tree & e = head position
             Tree.OrderAddTime += delegate (object sender, MyEvent e)
             {
                 // 模擬從資料庫取出e的Head易貨單
@@ -40,8 +43,10 @@ namespace lab_system
                 if (s == AddTimeState.success || s == AddTimeState.dead)
                 {
                     Console.WriteLine($"ID {o.ID} 收入+200 & nowTime: {o.nowTime}");
+                    if(youIDInt == o.ID)
+                        youMoneyBag += 200;
                     Console.WriteLine();
-                    if(s == AddTimeState.dead)
+                    if (s == AddTimeState.dead)
                     {
                         o.DeadTime = DateTime.Now;
                         Console.WriteLine($"ID {o.ID} 結束");
@@ -49,7 +54,7 @@ namespace lab_system
                         Console.WriteLine();
                     }
                 }
-                else if(s == AddTimeState.fail)
+                else if (s == AddTimeState.fail)
                 {
                     // 異常處理
                     Console.WriteLine("異常");
@@ -57,6 +62,7 @@ namespace lab_system
                 }
 
             };
+
             // 完成兩次易貨條件
             Tree.OrderFull += delegate (object sender, MyEvent e)
             {
@@ -68,10 +74,24 @@ namespace lab_system
                     Tree.AddOrder(OldOrder: o);
                 }
             };
-            for(int i = 0; i < 15; i++)
+
+            
+            for (int i = 0; i < 15; i++)
             {
-                db.Add(Tree.AddOrder(4));
+                db.Add(Tree.AddOrder(3));
             }
+
+            COrder youOrder = db.Find(p => p.ID == youIDInt);
+            if (youOrder != null)
+            {
+                Console.WriteLine($"總共收入: {youMoneyBag}");
+                Console.WriteLine("Live: " + youOrder.isLive);
+            }
+            else
+            {
+                Console.WriteLine($"找不到 {youIDInt} 號");
+            }
+
         }
 
     }
@@ -106,10 +126,10 @@ namespace lab_system
             nowTime = 0;
             maxTime = pmaxTime;
         }
-        
+
         public CPosition GetLastOrderPosition()
         {
-            if(Positions.Count == 0)
+            if (Positions.Count == 0)
             {
                 Positions.Add(new CPosition());
             }
@@ -133,16 +153,16 @@ namespace lab_system
                 return AddTimeState.success;
             }
             return AddTimeState.fail;
-
-
-            //if(nowTime + 1 >= maxTime)
-            //{
-            //    nowTime = maxTime;
-            //    isLive = false;
-            //    return false;
-            //}
-            //nowTime++;
-            //return true;
+        }
+        public bool SetExpand()
+        {
+            if (isLive)
+            {
+                IsExpand = true;
+                maxTime *= 2;
+                return true;
+            }
+            return false;
         }
     }
     // 位置
@@ -230,7 +250,7 @@ namespace lab_system
                 // 觸發易貨次數
                 OnOrderAddTime(new MyEvent(Order));
                 // 觸發易貨單2次易貨新增條件
-                if(p.Position % 2 == 1)
+                if (p.Position % 2 == 1)
                 {
                     OnOrderFull(new MyEvent(Order));
                 }
@@ -242,7 +262,7 @@ namespace lab_system
         protected virtual void OnOrderAddTime(MyEvent e)
         {
             EventHandler<MyEvent> handler = OrderAddTime;
-            if(handler != null)
+            if (handler != null)
                 handler.Invoke(this, e);
         }
         protected virtual void OnOrderFull(MyEvent e)
@@ -265,5 +285,6 @@ namespace lab_system
         success = 0,
         dead = 1,
         fail = 2,
-    }   
+    }
+
 }
